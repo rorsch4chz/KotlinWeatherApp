@@ -9,7 +9,7 @@ import com.pretang.kotlinweatherapp.domain.model.ForecastList
  * @data 2018/1/5
  * @description
  */
-class RequestForecastCommand(val zipCode: String) : Command<ForecastList> {
+class RequestForecastCommand(private val zipCode: String) : Command<ForecastList> {
     override fun excute(): ForecastList {
         val forecastRequest = ForecastRequest(zipCode)
         return ForecastDataMapper().convertFromDataModel(forecastRequest.execute())

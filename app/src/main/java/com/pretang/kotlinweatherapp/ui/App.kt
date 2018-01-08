@@ -1,6 +1,7 @@
 package com.pretang.kotlinweatherapp.ui
 
 import android.app.Application
+import com.pretang.kotlinweatherapp.domain.delegate.DelegatesExt
 
 /**
  * @author baizhou
@@ -9,7 +10,12 @@ import android.app.Application
  */
 class App : Application() {
 
+    companion object {
+        var instance: App by DelegatesExt.notNullSingleValue()
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
     }
 }
