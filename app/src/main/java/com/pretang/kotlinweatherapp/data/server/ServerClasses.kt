@@ -1,8 +1,8 @@
-package com.pretang.kotlinweatherapp
+package com.pretang.kotlinweatherapp.data.server
 
 /**
  * @author baizhou
- * @data 2018/1/5
+ * @data 2018/1/9
  * @description
  */
 data class ForecastResult(val city: City, val list: List<Forecast>)

@@ -1,4 +1,4 @@
-package com.pretang.kotlinweatherapp.domain.delegate
+package com.pretang.kotlinweatherapp.extensions
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty

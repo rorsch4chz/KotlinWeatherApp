@@ -1,4 +1,4 @@
-package com.pretang.kotlinweatherapp.domain
+package com.pretang.kotlinweatherapp.data.db
 
 /**
  * @author baizhou

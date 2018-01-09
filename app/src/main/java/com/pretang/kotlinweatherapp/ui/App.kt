@@ -1,7 +1,7 @@
 package com.pretang.kotlinweatherapp.ui
 
 import android.app.Application
-import com.pretang.kotlinweatherapp.domain.delegate.DelegatesExt
+import com.pretang.kotlinweatherapp.extensions.DelegatesExt
 
 /**
  * @author baizhou

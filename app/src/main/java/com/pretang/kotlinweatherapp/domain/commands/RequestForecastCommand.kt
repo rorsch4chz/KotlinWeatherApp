@@ -1,7 +1,6 @@
 package com.pretang.kotlinweatherapp.domain.commands
 
-import com.pretang.kotlinweatherapp.ForecastRequest
-import com.pretang.kotlinweatherapp.domain.ForecastDataMapper
+import com.pretang.kotlinweatherapp.domain.datasource.ForecastProvider
 import com.pretang.kotlinweatherapp.domain.model.ForecastList
 
 /**
@@ -9,9 +8,12 @@ import com.pretang.kotlinweatherapp.domain.model.ForecastList
  * @data 2018/1/5
  * @description
  */
-class RequestForecastCommand(private val zipCode: String) : Command<ForecastList> {
+class RequestForecastCommand(private val zipCode: Long, private val forecastProvider: ForecastProvider = ForecastProvider()) : Command<ForecastList> {
     override fun excute(): ForecastList {
-        val forecastRequest = ForecastRequest(zipCode)
-        return ForecastDataMapper().convertFromDataModel(forecastRequest.execute())
+        return forecastProvider.requestByZipCode(zipCode, DAYS)
+    }
+
+    companion object {
+        val DAYS = 7
     }
 }
