@@ -2,8 +2,8 @@ package com.pretang.kotlinweatherapp.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.widget.TextView
-import android.widget.Toolbar
 import com.pretang.kotlinweatherapp.R
 import com.pretang.kotlinweatherapp.domain.commands.RequestDayForecastCommand
 import com.pretang.kotlinweatherapp.domain.model.Forecast
@@ -18,7 +18,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 import java.text.DateFormat
 
-class DetailActivity : AppCompatActivity(), ToolbarManager{
+class DetailActivity : AppCompatActivity(), ToolbarManager {
 
     override val toolbar by lazy { find<Toolbar>(R.id.toolrbar) }
 

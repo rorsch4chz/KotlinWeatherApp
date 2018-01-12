@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
 import com.pretang.kotlinweatherapp.R
 import com.pretang.kotlinweatherapp.domain.commands.RequestForecastCommand
 import com.pretang.kotlinweatherapp.domain.model.Forecast
 import com.pretang.kotlinweatherapp.domain.model.ForecastList
+import com.pretang.kotlinweatherapp.extensions.DelegatesExt
+import com.pretang.kotlinweatherapp.extensions.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_forecast.view.*
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
 
     override val toolbar by lazy { find<Toolbar>(R.id.toolrbar) }
 
+    val zipCode: Long by DelegatesExt.preference(this, SettingsActivity.ZIP_CODE, SettingsActivity.DEFAULT_ZIP)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,8 +39,12 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
 
     override fun onResume() {
         super.onResume()
+        loadForecast()
+    }
+
+    private fun loadForecast() {
         doAsync {
-            val result = RequestForecastCommand("94043").excute()
+            val result = RequestForecastCommand(zipCode).excute()
             uiThread {
                 recycler.adapter = RecyclerAdapter(result) {
                     startActivity<DetailActivity>(DetailActivity.ID to it.id,
@@ -64,7 +72,7 @@ class MainActivity : AppCompatActivity(), ToolbarManager {
             fun bindForecast(forecast: Forecast) {
                 with(forecast) {
                     Picasso.with(itemView.context).load(iconUrl).into(itemView.icon)
-                    itemView.date.text = date
+                    itemView.date.text = date.toDateString()
                     itemView.description.text = description
                     itemView.maxTemperature.text = "${high.toString()}"
                     itemView.minTemperature.text = "${low.toString()}"

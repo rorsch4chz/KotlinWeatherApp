@@ -3,11 +3,12 @@ package com.pretang.kotlinweatherapp.ui.activities
 import android.annotation.SuppressLint
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
 import android.support.v7.widget.RecyclerView
-import android.widget.Toolbar
+import android.support.v7.widget.Toolbar
 import com.pretang.kotlinweatherapp.R
 import com.pretang.kotlinweatherapp.extensions.slideEnter
 import com.pretang.kotlinweatherapp.extensions.slideExit
 import com.pretang.kotlinweatherapp.ui.App
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -29,7 +30,7 @@ interface ToolbarManager {
         toolbar.inflateMenu(R.menu.menu_main)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.action_settings -> App.instance.toast("Settings")
+                R.id.action_settings -> toolbar.context.startActivity<SettingsActivity>()
                 else -> App.instance.toast("Unknown option")
             }
             true

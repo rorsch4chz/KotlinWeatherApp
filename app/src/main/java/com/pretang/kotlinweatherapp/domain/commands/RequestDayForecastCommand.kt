@@ -11,5 +11,4 @@ import com.pretang.kotlinweatherapp.domain.model.Forecast
 class RequestDayForecastCommand(val id: Long,
                                 val forecastProvider: ForecastProvider = ForecastProvider()) : Command<Forecast> {
     override fun excute() = forecastProvider.requestForecast(id)
-
 }
